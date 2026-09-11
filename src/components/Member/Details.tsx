@@ -97,10 +97,14 @@ export default function Page({ bioguide }: PageProps) {
                         </button>
                     )}
                 </nav>
-                <article className='font-mono overflow-x-auto rounded p-5 bg-zinc-200 dark:bg-zinc-700'>
-                    {activeTab === 'current' && renderLegislatorData(member)}
-                    {activeTab === 'social' && renderLegislatorSocial(member)}
-                    {activeTab === 'offices' && renderLegislatorOffice(member)}
+                <article className='font-mono overflow-x-auto
+                    rounded p-5 bg-zinc-200 dark:bg-zinc-700'>
+                    {activeTab === 'current'
+                        && renderLegislatorData(LegislatorCurrentSchema, member.currentData)}
+                    {activeTab === 'social'
+                        && renderLegislatorData(LegislatorSocialMediaSchema, member.socialData)}
+                    {activeTab === 'offices'
+                        && renderLegislatorData(LegislatorDistrictOfficeSchema, member.officeData)}
                 </article>
             </section>
         </div>
