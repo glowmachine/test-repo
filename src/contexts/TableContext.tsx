@@ -1,67 +1,6 @@
 import { createContext, useContext, useState, type PropsWithChildren } from "react";
 import { useSettingsContext } from "./SettingsContext";
-
-export type RowData = {
-    name: string,
-
-    bioguide: string | undefined,
-    lis: string | undefined,
-    thomas: string | undefined,
-    govtrack: string | undefined,
-    opensecrets: string | undefined,
-    votesmart: string | undefined,
-    // fec: string[],
-    cspan: string | undefined,
-    wikipedia: string | undefined,
-    ballotpedia: string | undefined,
-    maplight: string | undefined,
-    icpsr: string | undefined,
-    house_history: string | undefined,
-    wikidata: string | undefined,
-    google_entity_id: string | undefined,
-    pictorial: string | undefined,
-
-    first: string,
-    last: string,
-    official_full: string | undefined,
-    middle: string | undefined,
-    nickname: string | undefined,
-    suffix: string | undefined,
-
-    birthday: string,
-    gender: string,
-
-    type: string | undefined,
-    start: string | undefined,
-    end: string | undefined,
-    state: string | undefined,
-    district: number | undefined,
-    party: string | undefined,
-    class: number | undefined,
-    url: string | undefined,
-    address: string | undefined,
-    phone: string | undefined,
-    fax: string | undefined,
-    contact_form: string | undefined,
-    office: string | undefined,
-    state_rank: string | undefined,
-    rss_url: string | undefined,
-    caucus: string | undefined,
-    how: string | undefined,
-    'end-type': string | undefined,
-    // party_affiliations?: PartyAffiliation[],
-    leadership: string | undefined,
-
-    twitter: string | undefined,
-    twitter_id: string | undefined,
-    facebook: string | undefined,
-    youtube: string | undefined,
-    youtube_id: string | undefined,
-    instagram: string | undefined,
-    instagram_id: string | undefined,
-    mastodon: string | undefined,
-};
-export type Row = { [K in keyof RowData]: RowData[K] };
+import type { RowData } from "../types/RowData";
 
 type Column = {
     key: keyof RowData,

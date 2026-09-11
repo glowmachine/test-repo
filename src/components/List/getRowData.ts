@@ -1,10 +1,10 @@
-import type { Row } from "../../contexts/TableContext";
 import type { Legislator } from "../../types/LegislatorSchema";
 import type { LeadershipRole } from "../../types/LegislatorCurrentSchema";
+import type { RowData } from "../../types/RowData";
 
 function getLeadershipRole(terms: LeadershipRole[] | undefined): string | undefined {
     if (!terms || terms[terms.length - 1].end) return;
-    return terms[terms.length - 1].title
+    return terms[terms.length - 1].title;
 }
 
 export default function getRowData(data: Legislator[]): Row[] {

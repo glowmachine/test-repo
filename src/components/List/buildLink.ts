@@ -1,4 +1,5 @@
-import type { Row, RowData } from "../../contexts/TableContext";
+import type { Row } from "../../types/Row";
+import type { RowData } from "../../types/RowData";
 
 export default function buildLink(key: keyof RowData, row: Row): string | undefined {
     switch (key) {

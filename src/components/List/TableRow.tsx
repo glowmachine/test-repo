@@ -1,4 +1,5 @@
-import { useTableContext, type Row } from "../../contexts/TableContext";
+import { useTableContext } from "../../contexts/TableContext";
+import type { Row } from "../../types/Row";
 import { NavLink } from "react-router";
 import buildLink from "./buildLink";
 

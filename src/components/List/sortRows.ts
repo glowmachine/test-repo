@@ -1,4 +1,5 @@
-import type { RowData, Row } from "../../contexts/TableContext";
+import type { Row } from "../../types/Row";
+import type { RowData } from "../../types/RowData";
 
 export default function sortRows(rows: Row[], key: keyof RowData, asc: boolean): Row[] {
     return rows.sort((a, b) => {

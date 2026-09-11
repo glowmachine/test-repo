@@ -1,12 +1,13 @@
-import { useTableContext, type Row } from "../../contexts/TableContext";
 import type { Legislator } from "../../types/LegislatorSchema";
 import { useDataContext } from "../../contexts/DataContext";
+import { useTableContext } from "../../contexts/TableContext";
 import { useMemo, useState } from "react";
-import TableRow from "./TableRow";
 import getRowData from "./getRowData";
 import sortRows from "./sortRows";
 import filterData from "./filterData";
 import ColumnSelector from "./ColumnSelector";
+import TableRow from "./TableRow";
+import type { RowData } from "../../types/RowData";
 
 const buttonStyle = 'h-10 w-10 flex items-center justify-center rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-700';
 
@@ -15,10 +16,10 @@ export default function Table() {
     const { columns, sortBy, setSortBy, filterOptions } = useTableContext();
     const [colSelectOpen, setColSelectOpen] = useState(false);
 
-    const rows = useMemo<Row[]>(() => {
+    const rows = useMemo<RowData[]>(() => {
         if (!legislators) return [];
         const filteredData: Legislator[] = filterData(legislators, filterOptions);
-        let rowData: Row[] = getRowData(filteredData);
+        let rowData: RowData[] = getRowData(filteredData);
         rowData = sortRows(rowData, sortBy.key, sortBy.asc);
         return rowData;
     }, [legislators, columns, sortBy, filterOptions]);

@@ -1,4 +1,5 @@
-import type { FilterOptions, Row } from "../../contexts/TableContext";
+import type { Row } from "../../types/Row";
+import type { FilterOptions } from "../../contexts/TableContext";
 
 export default function filterRows(rows: Row[], filterOptions: FilterOptions): Row[] {
     let filteredRows = rows;
