@@ -1,4 +1,4 @@
-import type { Legislator } from "../../contexts/DataContext";
+import type { Legislator } from "../../types/LegislatorSchema";
 import type { FilterOptions } from "../../contexts/TableContext";
 import objectIncludes from "../../util/objectIncludes";
 

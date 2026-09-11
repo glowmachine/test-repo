@@ -1,10 +1,10 @@
 import { createContext, useContext, useEffect, useState, type PropsWithChildren } from "react";
 import { fetchData } from "../api/fetchData";
-import type { LegislatorCurrent } from "../types/LegislatorCurrent";
-import type { LegislatorSocialMedia, Social } from "../types/LegislatorSocialMedia";
-import type { LegislatorDistrictOffice, Office } from "../types/LegislatorDistrictOffice";
-
-export type Legislator = LegislatorCurrent & { social: Social, offices: Office[] };
+import z from "zod";
+import { LegislatorSchema, type Legislator } from "../types/LegislatorSchema";
+import { type LegislatorCurrent } from "../types/LegislatorCurrentSchema";
+import { type LegislatorSocialMedia } from "../types/LegislatorSocialMediaSchema";
+import { type LegislatorDistrictOffice } from "../types/LegislatorDistrictOfficeSchema";
 
 type DataContextValue = {
     legislators: Legislator[] | null,

@@ -1,5 +1,6 @@
-import { useDataContext, type Legislator } from "../../contexts/DataContext";
 import { useTableContext, type Row } from "../../contexts/TableContext";
+import type { Legislator } from "../../types/LegislatorSchema";
+import { useDataContext } from "../../contexts/DataContext";
 import { useMemo, useState } from "react";
 import TableRow from "./TableRow";
 import getRowData from "./getRowData";

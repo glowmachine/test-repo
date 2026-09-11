@@ -1,6 +1,6 @@
-import type { Legislator } from "../../contexts/DataContext";
 import type { Row } from "../../contexts/TableContext";
-import type { LeadershipRole } from "../../types/LegislatorCurrent";
+import type { Legislator } from "../../types/LegislatorSchema";
+import type { LeadershipRole } from "../../types/LegislatorCurrentSchema";
 
 function getLeadershipRole(terms: LeadershipRole[] | undefined): string | undefined {
     if (!terms || terms[terms.length - 1].end) return;

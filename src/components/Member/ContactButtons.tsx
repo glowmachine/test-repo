@@ -1,8 +1,8 @@
-import type { Legislator } from "../../contexts/DataContext";
-import type { Social } from "../../types/LegislatorSocialMedia";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faInstagram, faMastodon, faXTwitter, faYoutube, type IconDefinition } from '@fortawesome/free-brands-svg-icons';
 import { faLink } from "@fortawesome/free-solid-svg-icons";
+import type { Legislator } from "../../types/LegislatorSchema";
+import type { Social } from "../../types/LegislatorSocialMediaSchema";
 
 const buttonStyle = 'shrink-0 size-10 rounded-full grid place-items-center'
 

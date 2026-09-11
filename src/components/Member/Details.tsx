@@ -1,13 +1,13 @@
 import { useDataContext } from "../../contexts/DataContext";
 import { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
-import type { LeadershipRole } from "../../types/LegislatorCurrent";
 import { allAreas, type StateAbbreviation } from "../../types/states";
 import getDateDiff from "../../util/getDateDiff";
 import ContactButtons from "./ContactButtons";
 import { renderLegislatorData } from "./renderLegislatorData";
-import { renderLegislatorSocial } from "./renderLegislatorSocial";
-import renderLegislatorOffice from "./renderLegislatorOffice";
+import { LegislatorCurrentSchema, type LeadershipRole } from "../../types/LegislatorCurrentSchema";
+import { LegislatorSocialMediaSchema } from "../../types/LegislatorSocialMediaSchema";
+import { LegislatorDistrictOfficeSchema } from "../../types/LegislatorDistrictOfficeSchema";
 
 function abbreviateParty(party: string | undefined) {
     switch (party) {
