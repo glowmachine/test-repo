@@ -1,6 +1,6 @@
-import type { LegislatorCurrent } from "../types/LegislatorCurrent";
-import type { LegislatorSocialMedia } from "../types/LegislatorSocialMedia";
-import type { LegislatorDistrictOffice } from "../types/LegislatorDistrictOffice";
+import type { LegislatorCurrent } from "../types/LegislatorCurrentSchema";
+import type { LegislatorSocialMedia } from "../types/LegislatorSocialMediaSchema";
+import type { LegislatorDistrictOffice } from "../types/LegislatorDistrictOfficeSchema";
 
 export type DataType =
     | LegislatorCurrent
