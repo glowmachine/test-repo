@@ -28,18 +28,18 @@ export function DataProvider({ children }: PropsWithChildren) {
 
             try {
                 if (isMounted) {
-                    const legislatorData = await fetchData<LegislatorCurrent[]>('legislators-current.json');
-                    const socialData = await fetchData<LegislatorSocialMedia[]>('legislators-social-media.json');
-                    const socialByID = new Map(socialData.map(member => [member.id.bioguide, member]));
-                    const officeData = await fetchData<LegislatorDistrictOffice[]>('legislators-district-offices.json');
-                    const officeByID = new Map(officeData.map(member => [member.id.bioguide, member]));
-                    setLegislators(legislatorData.map(member => (
-                        {
-                            ...member,
-                            social: socialByID.get(member.id.bioguide)?.social || {},
-                            offices: officeByID.get(member.id.bioguide)?.offices || []
-                        }
-                    )));
+                    const [currentData, socialData, officeData] = await Promise.all([
+                        fetchData<LegislatorCurrent[]>('legislators-current.json'),
+                        fetchData<LegislatorSocialMedia[]>('legislators-social-media.json'),
+                        fetchData<LegislatorDistrictOffice[]>('legislators-district-offices.json'),
+                    ]);
+                    const legislatorData = currentData.map(member => ({
+                        currentData: member,
+                        socialData: socialData.find(item => item.id.bioguide === member.id.bioguide),
+                        offices: officeData.find(item => item.id.bioguide === member.id.bioguide),
+                    }));
+                    const parsedData: Legislator[] = z.array(LegislatorSchema).parse(legislatorData);
+                    setLegislators(parsedData);
                 };
             } catch (err) {
                 (isMounted && err instanceof Error)

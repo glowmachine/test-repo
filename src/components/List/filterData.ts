@@ -10,24 +10,24 @@ export default function filterData(data: Legislator[], filterOptions: FilterOpti
             .trim().toLowerCase().split(/\s+/).filter(str => str.length > 0);
 
         filteredData = filteredData.filter(member =>
-            searchStrings.every(str => objectIncludes(member.name, str))
+            searchStrings.every(str => objectIncludes(member.currentData.name, str))
         );
     }
 
     if (filterOptions.state)
         filteredData = filteredData.filter(member =>
-            (member.terms[member.terms.length - 1].state === filterOptions.state));
+            (member.currentData.terms[member.currentData.terms.length - 1].state === filterOptions.state));
 
     Object.entries(filterOptions.parties).forEach(([party, isChecked]) => {
         if (!isChecked)
             filteredData = filteredData.filter(member =>
-                (member.terms[member.terms.length - 1].party !== (party[0].toUpperCase() + party.slice(1)))
+                (member.currentData.terms[member.currentData.terms.length - 1].party !== (party[0].toUpperCase() + party.slice(1)))
             )
     });
     Object.entries(filterOptions.types).forEach(([type, isChecked]) => {
         if (!isChecked)
             filteredData = filteredData.filter(member =>
-                (member.terms[member.terms.length - 1].type !== (type))
+                (member.currentData.terms[member.currentData.terms.length - 1].type !== (type))
             )
     });
 

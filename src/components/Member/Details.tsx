@@ -19,7 +19,7 @@ function abbreviateParty(party: string | undefined) {
 }
 function getLeadershipRole(terms: LeadershipRole[] | undefined) {
     if (!terms || terms[terms.length - 1].end) return;
-    return terms[terms.length - 1].title
+    return terms[terms.length - 1].title;
 }
 
 type TabKey = 'current' | 'social' | 'offices';
@@ -46,11 +46,11 @@ export default function Page({ bioguide }: PageProps) {
 
     if (!legislators) return <p>No data found</p>
 
-    const member = legislators?.find(item => item.id.bioguide === bioguide);
+    const member = legislators?.find(item => item.currentData.id.bioguide === bioguide);
     if (!member) return <p>No data found for bioguide {bioguide}</p>
 
-    const age = getDateDiff(new Date(member.bio.birthday)).years;
-    const currentTerm = member.terms[member.terms.length - 1];
+    const age = member.currentData.bio.birthday ? getDateDiff(new Date(member.currentData.bio.birthday)).years : 0;
+    const currentTerm = member.currentData.terms[member.currentData.terms.length - 1];
 
     return (
         <div className='min-w-0 h-full overflow-auto flex flex-col
@@ -62,19 +62,21 @@ export default function Page({ bioguide }: PageProps) {
             </NavLink>
             <section className='w-full flex flex-col gap-2 sm:gap-8 items-center sm:flex-row'>
                 <div className='bg-black rounded aspect-[225/275] w-[min(225px,40vw)] overflow-hidden'>
-                    <img alt={`Profile photo for ${member.name.first} ${member.name.last}`}
-                        src={`https://unitedstates.github.io/images/congress/225x275/${member.id.bioguide}.jpg`}
+                    <img alt={`Profile photo for ${member.currentData.name.first} ${member.currentData.name.last}`}
+                        src={import.meta.env.VITE_USE_MOCK_DATA === 'true'
+                            ? '/'
+                            : `https://unitedstates.github.io/images/congress/225x275/${member.currentData.id.bioguide}.jpg`}
                         className='object-cover w-full h-full'
                     />
                 </div>
                 <div className='*:text-center sm:*:text-start'>
                     <div className='mb-1'>
-                        <h2 className='text-3xl'>{member.name.first} {member.name.last}, {age}{member.bio.gender}</h2>
+                        <h2 className='text-3xl'>{member.currentData.name.first} {member.currentData.name.last}, {age}{member.currentData.bio.gender}</h2>
                     </div>
                     <div className='*:text-xl'>
                         <p>{`(${abbreviateParty(currentTerm.party)}) ${currentTerm.type === 'rep' ? 'Representative' : 'Senator'}`}</p>
                         <p>{`${allAreas[currentTerm.state as StateAbbreviation]}${currentTerm.district ? ', District ' + currentTerm.district : ''}`}</p>
-                        <p>{getLeadershipRole(member.leadership_roles)}</p>
+                        <p>{getLeadershipRole(member.currentData?.leadership_roles)}</p>
                     </div>
                 </div>
             </section>

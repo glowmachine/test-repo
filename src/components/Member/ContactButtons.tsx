@@ -79,7 +79,7 @@ export default function ContactButtons({ member }: ContactButtonsProps) {
     return (
         <div className='flex flex-wrap justify-center gap-5'>
             <a
-                href={member.terms[member.terms.length - 1].url}
+                href={member.currentData.terms[member.currentData.terms.length - 1].url}
                 target='_blank' rel='noopener noreferrer'
                 className={`${buttonStyle} bg-zinc-200 hover:bg-zinc-300
                     dark:bg-zinc-700 dark:hover:bg-zinc-600`}>
@@ -87,17 +87,17 @@ export default function ContactButtons({ member }: ContactButtonsProps) {
             </a>
             {socials.map(socialKey => {
                 //button is disabled or property undefined
-                if (!buttonConfig[socialKey].enabled || !member.social[socialKey]) {
+                if (!buttonConfig[socialKey].enabled || !member.socialData?.social[socialKey]) {
                     return null;
                 }
-                return !member.social[socialKey]
+                return !member.socialData?.social[socialKey]
                     ? <a href='' onClick={e => e.preventDefault()}
                         className={`${buttonStyle} bg-zinc-100 cursor-default`}
                         key={socialKey}>
                         <FontAwesomeIcon icon={buttonConfig[socialKey].faIcon} />
                     </a>
                     : <a
-                        href={buttonConfig[socialKey].link(member.social[socialKey])}
+                        href={buttonConfig[socialKey].link(member.socialData?.social[socialKey])}
                         target='_blank' rel='noopener noreferrer'
                         className={`${buttonStyle} bg-zinc-200 hover:bg-zinc-300
                             dark:bg-zinc-700 dark:hover:bg-zinc-600`}

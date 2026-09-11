@@ -7,38 +7,39 @@ function getLeadershipRole(terms: LeadershipRole[] | undefined): string | undefi
     return terms[terms.length - 1].title;
 }
 
-export default function getRowData(data: Legislator[]): Row[] {
+export default function getRowData(data: Legislator[]): RowData[] {
     const selectedData = data.map(member => {
-        const currentTerm = member.terms[member.terms.length - 1];
+        const currentTerm = member.currentData.terms[member.currentData.terms.length - 1];
+
         return {
-            name: `${member.name.first} ${member.name.last}`,
+            name: `${member.currentData.name.first} ${member.currentData.name.last}`,
 
-            bioguide: member.id.bioguide,
-            thomas: member.id.thomas,
-            lis: member.id.lis,
-            govtrack: String(member.id.govtrack),
-            opensecrets: member.id.opensecrets,
-            votesmart: member.id.votesmart ? String(member.id.votesmart) : undefined,
+            bioguide: member.currentData.id.bioguide,
+            thomas: member.currentData.id.thomas,
+            lis: member.currentData.id.lis,
+            govtrack: String(member.currentData.id.govtrack),
+            opensecrets: member.currentData.id.opensecrets,
+            votesmart: member.currentData.id.votesmart ? String(member.currentData.id.votesmart) : undefined,
             // fec: string[],
-            cspan: member.id.cspan ? String(member.id.cspan) : undefined,
-            wikipedia: member.id.wikipedia,
-            house_history: member.id.house_history ? String(member.id.house_history) : undefined,
-            ballotpedia: member.id.ballotpedia,
-            maplight: member.id.maplight ? String(member.id.maplight) : undefined,
-            icpsr: member.id.icpsr ? String(member.id.icpsr) : undefined,
-            wikidata: member.id.wikidata,
-            google_entity_id: member.id.google_entity_id,
-            pictorial: member.id.pictorial ? String(member.id.pictorial) : undefined,
+            cspan: member.currentData.id.cspan ? String(member.currentData.id.cspan) : undefined,
+            wikipedia: member.currentData.id.wikipedia,
+            house_history: member.currentData.id.house_history ? String(member.currentData.id.house_history) : undefined,
+            ballotpedia: member.currentData.id.ballotpedia,
+            maplight: member.currentData.id.maplight ? String(member.currentData.id.maplight) : undefined,
+            icpsr: member.currentData.id.icpsr ? String(member.currentData.id.icpsr) : undefined,
+            wikidata: member.currentData.id.wikidata,
+            google_entity_id: member.currentData.id.google_entity_id,
+            pictorial: member.currentData.id.pictorial ? String(member.currentData.id.pictorial) : undefined,
 
-            first: member.name.first,
-            last: member.name.last,
-            official_full: member.name.official_full,
-            middle: member.name.middle,
-            nickname: member.name.nickname,
-            suffix: member.name.suffix,
+            first: member.currentData.name.first,
+            last: member.currentData.name.last,
+            official_full: member.currentData.name.official_full,
+            middle: member.currentData.name.middle,
+            nickname: member.currentData.name.nickname,
+            suffix: member.currentData.name.suffix,
 
-            birthday: member.bio.birthday,
-            gender: member.bio.gender,
+            birthday: member.currentData.bio.birthday,
+            gender: member.currentData.bio.gender,
 
             type: currentTerm.type,
             start: currentTerm.start,
@@ -59,16 +60,16 @@ export default function getRowData(data: Legislator[]): Row[] {
             how: currentTerm.how,
             "end-type": currentTerm["end-type"],
             // party_affiliations: currentTerm.party_affiliations,
-            leadership: getLeadershipRole(member.leadership_roles),
+            leadership: getLeadershipRole(member.currentData.leadership_roles),
 
-            twitter: member.social?.twitter,
-            twitter_id: member.social?.twitter_id,
-            facebook: member.social?.facebook,
-            youtube: member.social?.youtube,
-            youtube_id: member.social?.youtube_id,
-            instagram: member.social?.instagram,
-            instagram_id: member.social?.instagram_id,
-            mastodon: member.social?.mastodon,
+            twitter: member.socialData?.social.twitter,
+            twitter_id: member.socialData?.social.twitter_id,
+            facebook: member.socialData?.social.facebook,
+            youtube: member.socialData?.social.youtube,
+            youtube_id: member.socialData?.social.youtube_id,
+            instagram: member.socialData?.social.instagram,
+            instagram_id: member.socialData?.social.instagram_id,
+            mastodon: member.socialData?.social.mastodon,
         };
     })
     return selectedData;

@@ -9,9 +9,9 @@ export default function filterRows(rows: Row[], filterOptions: FilterOptions): R
             .trim().toLowerCase().split(/\s+/).filter(term => term.length > 0);
 
         filteredRows = filteredRows.filter((row) => {
-            const first = row.first.toLowerCase();
-            const last = row.last.toLowerCase();
-            return searchTerms.every(term => first.includes(term) || last.includes(term));
+            const first = row.first?.toLowerCase();
+            const last = row.last?.toLowerCase();
+            return searchTerms.every(term => first?.includes(term) || last?.includes(term));
         });
     }
 
