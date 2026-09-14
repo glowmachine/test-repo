@@ -18,7 +18,7 @@ export default function getRowData(data: Legislator[]): RowData[] {
             govtrack: id.govtrack,
             opensecrets: id.opensecrets,
             votesmart: id.votesmart,
-            // fec: string[],
+            fec: id.fec ?? [],
             cspan: id.cspan,
             wikipedia: id.wikipedia,
             house_history: id.house_history,

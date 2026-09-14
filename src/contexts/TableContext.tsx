@@ -24,7 +24,7 @@ export const idCols = [
     { key: 'govtrack', label: 'govtrack', selected: false },
     { key: 'opensecrets', label: 'opensecrets', selected: false },
     { key: 'votesmart', label: 'votesmart', selected: false },
-    // { key: 'fec', label: 'FEC', selected: false },
+    { key: 'fec', label: 'fec', selected: false },
     { key: 'cspan', label: 'cspan', selected: false },
     { key: 'wikipedia', label: 'wikipedia', selected: false },
     { key: 'ballotpedia', label: 'ballotpedia', selected: false },
