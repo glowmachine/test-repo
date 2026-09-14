@@ -51,8 +51,10 @@ export function renderLegislatorData<T extends z.ZodType>(schema: T, data: z.inf
         keyPath: [], data: data, yamlOutput: lines, isFirst: true
     });
     return (
-        <ul>{lines.map(line =>
-            <li className={`${(line.isEmpty) ? 'text-zinc-400' : ''} `}>
+        <ul>{lines.map((line, index) =>
+            //lines will not change, stable index
+            <li className={`${(line.isEmpty) ? 'text-zinc-400' : ''}`}
+                key={index}>
                 {buildYamlString(line)}
             </li>
         )}
