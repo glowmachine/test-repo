@@ -18,7 +18,7 @@ export default function TableRow({ row }: TableRowProps) {
                         <img alt={`Flag of ${row.state}`}
                             loading='lazy'
                             decoding='async'
-                            src={`/flags/Flag_of_${row.state}.svg`}
+                            src={`./flags/Flag_of_${row.state}.svg`}
                             onError={e => e.currentTarget.style.display = 'none'}
                             onLoad={e => e.currentTarget.classList.remove('opacity-0')}
                             className='object-cover w-full h-full opacity-0 transition-opacity duration-300 ease-out'
