@@ -40,27 +40,6 @@ export default function Table() {
 
     return (<>
         {colSelectOpen && <ColumnSelector colSelectOpen={colSelectOpen} setColSelectOpen={setColSelectOpen} />}
-        {/* <div id='page-controls' className='self-end m-1 flex items-center gap-1'>
-            {rows.length === 0
-                ? <span>0-0 of 0</span>
-                : <span>
-                    {pageStart}-{pageEnd} of {rows.length}
-                </span>}
-            <button
-                className='w-5 h-5 border rounded-full
-                hover:bg-gray-200 active:bg-gray-400'
-                disabled={pageSettings.index === 0}
-                onClick={() => setPageSettings(p =>
-                    ({ ...p, index: p.index - p.rowsPerPage }))}>
-                ←</button>
-            <button
-                className='w-5 h-5 border rounded-full
-                hover:bg-gray-200 active:bg-gray-400'
-                disabled={pageSettings.index + pageSettings.rowsPerPage >= rows.length}
-                onClick={() => setPageSettings(p =>
-                    ({ ...p, index: p.index + p.rowsPerPage }))}>
-                →</button>
-        </div> */}
         {isLoading && <div className='h-full grid place-content-center
                 text-3xl text-zinc-600 dark:text-zinc-300'>Loading Database</div>}
         {error && <div className='h-full grid place-content-center
@@ -70,7 +49,26 @@ export default function Table() {
             <div className='sticky left-0 w-full h-12 pl-2 flex items-center gap-1'>
                 <h1 className='text-3xl'>Legislators</h1>
                 <span>({rows.length})</span>
-                <div className='ml-auto'>
+                <div className='flex gap-5 ml-auto'>
+                    {/* <div id='page-controls' className='self-end flex items-center gap-2'>
+                        {rows.length === 0
+                            ? <span>0-0 of 0</span>
+                            : <span>
+                                {pageStart}-{pageEnd} of {rows.length}
+                            </span>}
+                        <button
+                            className={buttonStyle}
+                            disabled={pageSettings.index === 0}
+                            onClick={() => setPageSettings(p =>
+                                ({ ...p, index: p.index - p.rowsPerPage }))}>
+                            ←</button>
+                        <button
+                            className={buttonStyle}
+                            disabled={pageSettings.index + pageSettings.rowsPerPage >= rows.length}
+                            onClick={() => setPageSettings(p =>
+                                ({ ...p, index: p.index + p.rowsPerPage }))}>
+                            →</button>
+                    </div> */}
                     <button className={`${buttonStyle} ${colSelectOpen ? 'bg-zinc-200' : ''}`}
                         onClick={() => setColSelectOpen(prev => !prev)}
                     >
@@ -107,8 +105,8 @@ export default function Table() {
                 </thead>
                 <tbody>
                     {rows &&
-                        rows.map(row =>
-                            // (index >= pageSettings.index && index < pageSettings.index + pageSettings.rowsPerPage)
+                        rows.map((row) =>
+                            // (index >= pageSettings.index && index < pageSettings.index + pageSettings.rowsPerPage) &&
                             <TableRow row={row} key={row.bioguide} />
                         )}
                 </tbody>
