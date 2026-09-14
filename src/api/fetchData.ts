@@ -18,7 +18,7 @@ export async function fetchData<T>(filename: Filename): Promise<T> {
     try {
         if (import.meta.env.VITE_USE_MOCK_DATA === 'true') {
             const mockResponse = await fetch(
-                `../tests/fixtures/${filename}`
+                `/uscl-viewer/tests/fixtures/${filename}`
             );
             return await mockResponse.json();
         }
