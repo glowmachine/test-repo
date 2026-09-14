@@ -4,11 +4,11 @@ import { districts, states, territories } from "../../types/states";
 const styleCheckboxButton = `rounded-full border
                             px-2 py-1 transition-colors select-none
 
-                                 text-zinc-300      peer-checked:text-zinc-100      bg-zinc-100      peer-checked:bg-zinc-500
-                            dark:text-zinc-500 dark:peer-checked:text-zinc-700 dark:bg-zinc-700 dark:peer-checked:bg-zinc-300
-
-                            peer-hover:ring-2 peer-hover:ring-blue-700
-                            peer-focus-visible:ring-2 peer-focus-visible:ring-blue-700`;
+                            text-zinc-300      peer-checked:text-zinc-100      bg-zinc-100      peer-checked:bg-zinc-400
+                            dark:text-zinc-400 dark:peer-checked:text-zinc-700 dark:bg-zinc-700 dark:peer-checked:bg-zinc-300
+                            -outline-offset-2 outline-blue-600 ring-zinc-100
+                            peer-hover:outline-2 peer-hover:ring-1
+                            peer-focus-visible:outline-2 peer-focus-visible:ring-1`;
 
 export default function TableFilters() {
     const { filterOptions, setFilterOptions } = useTableContext();
@@ -16,7 +16,7 @@ export default function TableFilters() {
     return (
         <div id='filters_container'
             className='w-full flex flex-row flex-wrap items-center justify-evenly gap-1
-                *:border *:rounded *:px-2 *:pt-2 *:pb-4 *:flex *:gap-1 *:flex *:flex-col *:items-center'>
+                *:border *:rounded *:px-2 *:pt-2 *:pb-4 *:flex *:gap-2 *:flex *:flex-col *:items-center'>
             <fieldset>
                 <legend>State</legend>
                 <label className='sr-only' htmlFor='filterState'>State</label>
