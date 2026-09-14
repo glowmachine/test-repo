@@ -1,20 +1,22 @@
 import type { Legislator } from "../../types/LegislatorSchema";
 import { useDataContext } from "../../contexts/DataContext";
 import { useTableContext } from "../../contexts/TableContext";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import getRowData from "./getRowData";
 import sortRows from "./sortRows";
 import filterData from "./filterData";
 import ColumnSelector from "./ColumnSelector";
 import TableRow from "./TableRow";
 import type { RowData } from "../../types/RowData";
+import ToTopButton from "../ToTopButton";
 
-const buttonStyle = 'h-10 w-10 flex items-center justify-center rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-700';
+const buttonStyle = 'outline h-10 w-10 flex items-center justify-center rounded-full hover:cursor-pointer hover:hover:bg-zinc-200 dark:hover:bg-zinc-700';
 
 export default function Table() {
     const { legislators, isLoading, error } = useDataContext();
     const { columns, sortBy, setSortBy, filterOptions } = useTableContext();
     const [colSelectOpen, setColSelectOpen] = useState(false);
+    const scrollableDiv = useRef<HTMLDivElement>(null);
 
     const rows = useMemo<RowData[]>(() => {
         if (!legislators) return [];
@@ -44,8 +46,10 @@ export default function Table() {
                 text-3xl text-zinc-600 dark:text-zinc-300'>Loading Database</div>}
         {error && <div className='h-full grid place-content-center
                 text-2xl text-red-500'>{error.message}</div>}
-        {(!isLoading && !error) && <div className='min-w-0 h-full overflow-auto px-5 pb-5
-            bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'>
+        {(!isLoading && !error) && <div className='relative min-w-0 h-full overflow-auto px-5 pb-5
+            bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300'
+            ref={scrollableDiv}>
+            <ToTopButton div={scrollableDiv} style={buttonStyle} />
             <div className='sticky left-0 w-full h-12 pl-2 flex items-center gap-1'>
                 <h1 className='text-3xl'>Legislators</h1>
                 <span>({rows.length})</span>
