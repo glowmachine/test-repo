@@ -31,7 +31,7 @@ export default function About() {
                     <div>
                         <h2 className='font-bold text-2xl'>Feedback</h2>
                         <ul className='ml-4 list-disc'>
-                            <li>If you have found any bugs to report or features to request, please open a GitHub issue <a href='https://github.com/glowmachine/congress-search-v3' target='_blank' rel='noopener noreferrer' className='underline'>here</a>.</li>
+                            <li>If you have found any bugs to report or features to request, please open a GitHub issue <a href='https://github.com/glowmachine/uscl-viewer' target='_blank' rel='noopener noreferrer' className='underline'>here</a>.</li>
                             <li>If you have found any broken or incorrect information, please consider contributing to the unitedstates/congress-legislators project <a href='https://github.com/unitedstates/congress-legislators' target='_blank' rel='noopener noreferrer' className='underline'>here</a>.</li>
                         </ul>
                     </div>
