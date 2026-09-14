@@ -66,7 +66,9 @@ export default function Page({ bioguide }: PageProps) {
                         src={import.meta.env.VITE_USE_MOCK_DATA === 'true'
                             ? '/'
                             : `https://unitedstates.github.io/images/congress/225x275/${member.currentData.id.bioguide}.jpg`}
-                        className='object-cover w-full h-full'
+                        onError={e => e.currentTarget.style.display = 'none'}
+                        onLoad={e => e.currentTarget.classList.remove('opacity-0')}
+                        className='object-cover w-full h-full opacity-0 transition-opacity duration-300 ease-out'
                     />
                 </div>
                 <div className='*:text-center sm:*:text-start'>
@@ -107,6 +109,6 @@ export default function Page({ bioguide }: PageProps) {
                         && renderLegislatorData(LegislatorDistrictOfficeSchema, member.officeData)}
                 </article>
             </section>
-        </div>
+        </div >
     );
 }

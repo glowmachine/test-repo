@@ -20,7 +20,8 @@ export default function TableRow({ row }: TableRowProps) {
                             decoding='async'
                             src={`/flags/Flag_of_${row.state}.svg`}
                             onError={e => e.currentTarget.style.display = 'none'}
-                            className='object-cover w-full h-full'
+                            onLoad={e => e.currentTarget.classList.remove('opacity-0')}
+                            className='object-cover w-full h-full opacity-0 transition-opacity duration-250 ease-out'
                         />
                     </div>
                 </NavLink>
