@@ -21,7 +21,7 @@ export default function TableRow({ row }: TableRowProps) {
                             src={`/flags/Flag_of_${row.state}.svg`}
                             onError={e => e.currentTarget.style.display = 'none'}
                             onLoad={e => e.currentTarget.classList.remove('opacity-0')}
-                            className='object-cover w-full h-full opacity-0 transition-opacity duration-250 ease-out'
+                            className='object-cover w-full h-full opacity-0 transition-opacity duration-300 ease-out'
                         />
                     </div>
                 </NavLink>

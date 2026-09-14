@@ -10,7 +10,8 @@ import TableRow from "./TableRow";
 import type { RowData } from "../../types/RowData";
 import ToTopButton from "../ToTopButton";
 
-const buttonStyle = 'outline h-10 w-10 flex items-center justify-center rounded-full hover:cursor-pointer hover:hover:bg-zinc-200 dark:hover:bg-zinc-700';
+const buttonStyle = `h-10 w-10 flex items-center justify-center rounded-full hover:cursor-pointer
+hover:hover:bg-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-zinc-600`;
 
 export default function Table() {
     const { legislators, isLoading, error } = useDataContext();
