@@ -1,5 +1,5 @@
 import { useDataContext } from "../../contexts/DataContext";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { allAreas, type StateAbbreviation } from "../../types/states";
 import getDateDiff from "../../util/getDateDiff";
@@ -8,6 +8,7 @@ import { renderLegislatorData } from "./renderLegislatorData";
 import { LegislatorCurrentSchema, type LeadershipRole } from "../../types/LegislatorCurrentSchema";
 import { LegislatorSocialMediaSchema } from "../../types/LegislatorSocialMediaSchema";
 import { LegislatorDistrictOfficeSchema } from "../../types/LegislatorDistrictOfficeSchema";
+import ToTopButton from "../ToTopButton";
 
 function abbreviateParty(party: string | undefined) {
     switch (party) {
@@ -35,7 +36,9 @@ interface PageProps {
 export default function Page({ bioguide }: PageProps) {
     const { legislators } = useDataContext();
     const [activeTab, setActiveTab] = useState<TabKey>('current');
+    const scrollableDiv = useRef<HTMLDivElement>(null);
     const navigate = useNavigate();
+
     useEffect(() => {
         function goBack(e: KeyboardEvent) {
             if (e.key === 'Escape' || e.key === 'Backspace') navigate(-1);
@@ -54,10 +57,14 @@ export default function Page({ bioguide }: PageProps) {
 
     return (
         <div className='min-w-0 h-full overflow-auto flex flex-col
-            px-2 sm:px-5 pb-2 sm:pb-5 gap-4 sm:gap-8'>
+               px-2 sm:px-5 pb-2 sm:pb-5 gap-4 sm:gap-8'
+            ref={scrollableDiv}>
+            <ToTopButton div={scrollableDiv}
+                style='h-10 w-10 flex items-center justify-center rounded-full hover:cursor-pointer hover:hover:bg-zinc-200 dark:hover:bg-zinc-700' />
+
             <NavLink to='/' className='mt-2 shrink-0 w-10 h-10 rounded-full grid place-items-center
-                hover:bg-zinc-200 active:bg-zinc-300
-                dark:hover:bg-zinc-700 dark:active:bg-zinc-600'>
+                   hover:bg-zinc-200 active:bg-zinc-300
+                   dark:hover:bg-zinc-700 dark:active:bg-zinc-600'>
                 <span className='material-symbols-outlined'>arrow_back</span>
             </NavLink>
             <section className='w-full flex flex-col gap-2 sm:gap-8 items-center sm:flex-row'>
@@ -99,8 +106,7 @@ export default function Page({ bioguide }: PageProps) {
                         </button>
                     )}
                 </nav>
-                <article className='font-mono overflow-x-auto
-                    rounded p-5 bg-zinc-200 dark:bg-zinc-700'>
+                <article className='font-mono overflow-x-auto rounded p-5 bg-zinc-200 dark:bg-zinc-700'>
                     {activeTab === 'current'
                         && renderLegislatorData(LegislatorCurrentSchema, member.currentData)}
                     {activeTab === 'social'
