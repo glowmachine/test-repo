@@ -1,7 +1,21 @@
+import { LegislatorCurrentSchema } from "../../types/LegislatorCurrentSchema";
+import { LegislatorDistrictOfficeSchema } from "../../types/LegislatorDistrictOfficeSchema";
+import { LegislatorSocialMediaSchema } from "../../types/LegislatorSocialMediaSchema";
 import { walkZodSchema, type YamlLine } from "../../util/walkZodSchema";
 import z from "zod";
 
-// const styleHover = 'hover:bg-zinc-300 dark:hover:bg-zinc600 pr-5';
+function getSourceFilename(schema: z.ZodObject): string {
+    switch (schema) {
+        case LegislatorCurrentSchema:
+            return 'legislators-current.yaml'
+        case LegislatorSocialMediaSchema:
+            return 'legislators-social-media.yaml'
+        case LegislatorDistrictOfficeSchema:
+            return 'legislators-district-offices.yaml'
+        default:
+            return ''
+    }
+}
 
 function isDateKey(str: string | undefined): boolean {
     return (str === 'birthday' || str === 'start' || str === 'end');
@@ -44,20 +58,29 @@ const buildYamlString = (line: YamlLine): string => {
     return output;
 };
 
-export function renderLegislatorData<T extends z.ZodType>(schema: T, data: z.infer<T> | undefined) {
+export function renderLegislatorData<T extends z.ZodObject>(schema: T, data: z.infer<T> | undefined) {
     const lines: YamlLine[] = [];
     walkZodSchema({
         parentSchema: undefined, currentSchema: schema,
         keyPath: [], data: data, yamlOutput: lines, isFirst: true
     });
     return (
-        <ul>{lines.map((line, index) =>
-            //lines will not change, stable index
-            <li className={`${(line.isEmpty) ? 'text-zinc-400' : ''}`}
-                key={index}>
-                {buildYamlString(line)}
-            </li>
-        )}
-        </ul>
+        <>
+            <p className='pb-5'>
+                <a href='https://github.com/unitedstates/congress-legislators#overview'
+                    target='_blank' rel='noopener noreferrer'
+                    className='underline hover:text-red-500'>
+                    {getSourceFilename(schema)}
+                </a>
+            </p>
+            <ul>{lines.map((line, index) =>
+                //lines will not change, stable index
+                <li className={`${(line.isEmpty) ? 'text-zinc-400' : ''}`}
+                    key={index}>
+                    {buildYamlString(line)}
+                </li>
+            )}
+            </ul>
+        </>
     )
 }
