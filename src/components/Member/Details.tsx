@@ -61,8 +61,7 @@ export default function Page({ bioguide }: PageProps) {
             ref={scrollableDiv}>
             <ToTopButton div={scrollableDiv}
                 style={`h-10 w-10 flex items-center outline justify-center rounded-full hover:cursor-pointer
-                hover:hover:bg-zinc-200 dark:hover:bg-zinc-700`} />
-
+                hover:hover:bg-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-zinc-600`} />
             <NavLink to='/' className='mt-2 shrink-0 w-10 h-10 rounded-full grid place-items-center
                    hover:bg-zinc-200 active:bg-zinc-300
                    dark:hover:bg-zinc-700 dark:active:bg-zinc-600'>

@@ -4,9 +4,11 @@ import { districts, states, territories } from "../../types/states";
 const styleCheckboxButton = `rounded-full border
                             px-2 py-1 transition-colors select-none
 
-                            text-zinc-300      peer-checked:text-zinc-100      bg-zinc-100      peer-checked:bg-zinc-400
-                            dark:text-zinc-400 dark:peer-checked:text-zinc-700 dark:bg-zinc-700 dark:peer-checked:bg-zinc-300
+                                 text-zinc-700       bg-zinc-100       peer-checked:text-zinc-100       peer-checked:bg-zinc-700
+                            dark:text-zinc-300  dark:bg-zinc-700  dark:peer-checked:text-zinc-700  dark:peer-checked:bg-zinc-300
+
                             -outline-offset-2 outline-blue-600 ring-zinc-100
+
                             peer-hover:outline-2 peer-hover:ring-1
                             peer-focus-visible:outline-2 peer-focus-visible:ring-1`;
 
