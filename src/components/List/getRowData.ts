@@ -11,8 +11,7 @@ export default function getRowData(data: Legislator[]): RowData[] {
         const social = member.socialData?.social;
 
         return {
-            name: `${member.currentData.name.first} ${member.currentData.name.last}`,
-
+            name: name.official_full ?? `${member.currentData.name.first} ${member.currentData.name.last}`,
             bioguide: id.bioguide,
             thomas: id.thomas,
             lis: id.lis,
