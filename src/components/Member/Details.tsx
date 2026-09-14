@@ -50,7 +50,7 @@ export default function Page({ bioguide }: PageProps) {
     if (!member) return <p>No data found for bioguide {bioguide}</p>
 
     const age = member.currentData.bio.birthday ? getDateDiff(new Date(member.currentData.bio.birthday)).years : 0;
-    const currentTerm = member.currentData.terms[member.currentData.terms.length - 1];
+    const currentTerm = member.currentData.terms.at(-1);
 
     return (
         <div className='min-w-0 h-full overflow-auto flex flex-col
@@ -76,8 +76,8 @@ export default function Page({ bioguide }: PageProps) {
                         <h2 className='text-3xl'>{member.currentData.name.first} {member.currentData.name.last}, {age}{member.currentData.bio.gender}</h2>
                     </div>
                     <div className='*:text-xl'>
-                        <p>{`(${abbreviateParty(currentTerm.party)}) ${currentTerm.type === 'rep' ? 'Representative' : 'Senator'}`}</p>
-                        <p>{`${allAreas[currentTerm.state as StateAbbreviation]}${currentTerm.district ? ', District ' + currentTerm.district : ''}`}</p>
+                        <p>{`(${abbreviateParty(currentTerm?.party)}) ${currentTerm?.type === 'rep' ? 'Representative' : 'Senator'}`}</p>
+                        <p>{`${allAreas[currentTerm?.state as StateAbbreviation]}${currentTerm?.district ? ', District ' + currentTerm?.district : ''}`}</p>
                         <p>{getLeadershipRole(member.currentData?.leadership_roles)}</p>
                     </div>
                 </div>
@@ -109,6 +109,6 @@ export default function Page({ bioguide }: PageProps) {
                         && renderLegislatorData(LegislatorDistrictOfficeSchema, member.officeData)}
                 </article>
             </section>
-        </div >
+        </div>
     );
 }
