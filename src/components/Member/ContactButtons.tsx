@@ -6,14 +6,13 @@ import type { Social } from "../../types/LegislatorSocialMediaSchema";
 
 const buttonStyle = 'shrink-0 size-10 rounded-full grid place-items-center'
 
-const socials = [
+const socialKeys = [
     'twitter',
-    'facebook',
-    'youtube_id',
-    // 'twitter_id',
-    'youtube',
     'instagram',
-    'instagram_id',
+    // 'instagram_id',
+    'youtube',
+    // 'youtube_id',
+    'facebook',
     'mastodon',
 ] satisfies (keyof Social)[];
 const buttonConfig: Record<keyof Social,
@@ -28,28 +27,22 @@ const buttonConfig: Record<keyof Social,
         link: (id) => `https://twitter.com/${id}`,
         enabled: true
     },
-    facebook: {
-        label: 'Facebook',
-        faIcon: faFacebook,
-        link: (id) => `https://facebook.com/${id}`,
+    twitter_id: {
+        label: 'twitter_id',
+        faIcon: faXTwitter,
+        link: (id) => `https://twitter.com/${id}`,
+        enabled: false
+    },
+    youtube: {
+        label: 'youtube',
+        faIcon: faYoutube,
+        link: (id) => `https://youtube.com/user/${id}`,
         enabled: true
     },
     youtube_id: {
         label: 'youtube_id',
         faIcon: faYoutube,
         link: (id) => `https://youtube.com/channel/${id}`,
-        enabled: true
-    },
-    twitter_id: {
-        label: 'twitter_id',
-        faIcon: faXTwitter,
-        link: (id) => `https://twitter.com/${id}`,
-        enabled: true
-    },
-    youtube: {
-        label: 'youtube',
-        faIcon: faYoutube,
-        link: (id) => `https://youtube.com/user/${id}`,
         enabled: true
     },
     instagram: {
@@ -64,6 +57,12 @@ const buttonConfig: Record<keyof Social,
         link: (id) => `https://twitter.com/${id}`,
         enabled: true
     },
+    facebook: {
+        label: 'Facebook',
+        faIcon: faFacebook,
+        link: (id) => `https://facebook.com/${id}`,
+        enabled: true
+    },
     mastodon: {
         label: 'mastodon',
         faIcon: faMastodon,
@@ -76,6 +75,7 @@ type ContactButtonsProps = {
     member: Legislator
 }
 export default function ContactButtons({ member }: ContactButtonsProps) {
+    const socials = member.socialData?.social || {};
     return (
         <div className='flex flex-wrap justify-center gap-5'>
             <a
@@ -85,22 +85,44 @@ export default function ContactButtons({ member }: ContactButtonsProps) {
                     dark:bg-zinc-700 dark:hover:bg-zinc-600`}>
                 <FontAwesomeIcon icon={faLink} />
             </a>
-            {socials.map(socialKey => {
-                //button is disabled or property undefined
-                if (!buttonConfig[socialKey].enabled || !member.socialData?.social[socialKey]) {
-                    return null;
+            {socialKeys.map(socialKey => {
+                //button is disabled, skip
+                if (!buttonConfig[socialKey].enabled) return null;
+
+                //exception for instagram and youtube, use only one if both id exist
+                if (socialKey === 'instagram' && socials['instagram_id']) {
+                    return <a
+                        href={buttonConfig['instagram_id'].link(socials['instagram_id'])}
+                        target='_blank' rel='noopener noreferrer'
+                        className={`${buttonStyle} text-zinc-700 bg-zinc-200 hover:bg-zinc-300
+                            dark:text-zinc-100 dark:bg-zinc-500 dark:hover:bg-zinc-600`}
+                        key={socialKey}>
+                        <FontAwesomeIcon icon={buttonConfig[socialKey].faIcon} />
+                    </a>
                 }
-                return !member.socialData?.social[socialKey]
-                    ? <a href='' onClick={e => e.preventDefault()}
-                        className={`${buttonStyle} bg-zinc-100 cursor-default`}
+                if (socialKey === 'youtube' && socials['youtube_id']) {
+                    return <a
+                        href={buttonConfig['youtube_id'].link(socials['youtube_id'])}
+                        target='_blank' rel='noopener noreferrer'
+                        className={`${buttonStyle} text-zinc-700 bg-zinc-200 hover:bg-zinc-300
+                            dark:text-zinc-100 dark:bg-zinc-500 dark:hover:bg-zinc-600`}
+                        key={socialKey}>
+                        <FontAwesomeIcon icon={buttonConfig[socialKey].faIcon} />
+                    </a>
+                }
+
+                return socials[socialKey]
+                    ? <a
+                        href={buttonConfig[socialKey].link(socials[socialKey])}
+                        target='_blank' rel='noopener noreferrer'
+                        className={`${buttonStyle} text-zinc-700 bg-zinc-200 hover:bg-zinc-300
+                            dark:text-zinc-100 dark:bg-zinc-500 dark:hover:bg-zinc-600`}
                         key={socialKey}>
                         <FontAwesomeIcon icon={buttonConfig[socialKey].faIcon} />
                     </a>
                     : <a
-                        href={buttonConfig[socialKey].link(member.socialData?.social[socialKey])}
-                        target='_blank' rel='noopener noreferrer'
-                        className={`${buttonStyle} bg-zinc-200 hover:bg-zinc-300
-                            dark:bg-zinc-700 dark:hover:bg-zinc-600`}
+                        className={`${buttonStyle} cursor-default text-zinc-300 bg-zinc-100
+                            dark:text-zinc-600 dark:bg-zinc-700`}
                         key={socialKey}>
                         <FontAwesomeIcon icon={buttonConfig[socialKey].faIcon} />
                     </a>
