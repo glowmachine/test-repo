@@ -41,9 +41,9 @@ export function DataProvider({ children }: PropsWithChildren) {
                     const parsedData: Legislator[] = z.array(LegislatorSchema).parse(legislatorData);
                     setLegislators(parsedData);
                 };
-            } catch (err) {
-                (isMounted && err instanceof Error)
-                    ? setError(err)
+            } catch (error) {
+                (isMounted && error instanceof Error)
+                    ? setError(error)
                     : setError(new Error('Unknown Error'));
             } finally {
                 isMounted = false;

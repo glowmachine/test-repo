@@ -1,43 +1,37 @@
-import type { LegislatorCurrent } from "../types/LegislatorCurrentSchema";
-import type { LegislatorSocialMedia } from "../types/LegislatorSocialMediaSchema";
-import type { LegislatorDistrictOffice } from "../types/LegislatorDistrictOfficeSchema";
-
-export type DataType =
-    | LegislatorCurrent
-    | LegislatorSocialMedia
-    | LegislatorDistrictOffice;
-
 export type Filename =
     | 'legislators-current.json'
     | 'legislators-social-media.json'
     | 'legislators-district-offices.json';
-
 const baseUrl = 'https://unitedstates.github.io/congress-legislators';
 const timeoutMs = 5000;
+
 export async function fetchData<T>(filename: Filename): Promise<T> {
     try {
-        if (import.meta.env.VITE_USE_MOCK_DATA === 'true') {
-            const mockResponse = await fetch(
+        const response = (import.meta.env.VITE_USE_MOCK_DATA === 'true')
+            ? await fetch(
                 `/uscl-viewer/tests/fixtures/${filename}`
+            )
+            : await fetch(
+                `${baseUrl}/${filename}`,
+                { signal: AbortSignal.timeout(timeoutMs) }
             );
-            return await mockResponse.json();
+
+        //Handle network error
+        if (!response.ok) {
+            throw new Error(`HTTP Error Code: ${response.status}`);
         }
 
-        const response = await fetch(
-            `${baseUrl}/${filename}`,
-            { signal: AbortSignal.timeout(timeoutMs) }
-        );
-        if (!response.ok) {
-            throw new Error(`Error Code: ${response.status}, failed to fetch ${filename}`);
-        }
         return await response.json();
     }
     catch (error) {
-        if (error instanceof TypeError) {
-            throw new Error(`Network Error: connection failed for ${filename}`);
-        } else if (error instanceof Error && error.name === 'TimeoutError') {
-            throw new Error(`Request Time Exceeded, failed to fetch ${filename} within 5 seconds`);
-        } else {
+        //Handle other errors
+        if (error instanceof SyntaxError) {
+            throw new Error(`Invalid JSON: ${filename}`);
+        }
+        else if (error instanceof Error && error.name === 'TimeoutError') {
+            throw new Error(`Fetch Timeout: ${filename}`);
+        }
+        else {
             throw error;
         }
     }

@@ -1,42 +1,53 @@
 import { fetchData } from "./fetchData";
 
 describe('fetchData', () => {
-    afterEach(() => {
-        vi.restoreAllMocks();
-    });
+    const filename = 'legislators-current.json';
 
-    it('returns promise when response.ok is true', async () => {
-        const mockData = [
-            { id: '8', name: 'Jane Doe' },
-            { id: '8', name: 'John Smith' },
-        ];
-        vi.spyOn(globalThis, 'fetch').mockResolvedValue({
-            ok: true,
-            json: vi.fn().mockResolvedValue(mockData) as unknown
-        } as Response);
-        await expect(fetchData('legislators-current.json')).resolves.toBe(mockData);
+    it('throws HTTP error when response is not ok', async () => {
+        vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+            {
+                ok: false,
+                status: 404,
+            } as Response
+        );
+        await expect(fetchData(filename))
+            .rejects.toThrow('HTTP Error Code: 404');
     });
-
-    it('throws when response.ok is false', async () => {
-        vi.spyOn(globalThis, 'fetch').mockResolvedValue({
-            ok: false,
-        } as Response);
-        await expect(fetchData('legislators-current.json')).rejects
-            .toThrow(/Error Code:/);
+    it('throws when JSON cannot be parsed', async () => {
+        vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+            {
+                ok: true,
+                json: () => Promise.reject(new SyntaxError(`Invalid JSON: ${filename}`)),
+            } as Response
+        );
+        await expect(fetchData(filename))
+            .rejects.toThrow(`Invalid JSON: ${filename}`);
     });
-
-    it('throws when fetch times out', async () => {
-        const err = new Error();
-        err.name = 'TimeoutError';
-        vi.spyOn(globalThis, 'fetch').mockRejectedValue(err);
-        await expect(fetchData('legislators-current.json')).rejects
-            .toThrow(/Request Time Exceeded/);
+    it('throws when request times out', async () => {
+        const timeoutError = new Error(`Fetch Timeout: ${filename}`);
+        timeoutError.name = 'TimeoutError';
+        vi.spyOn(globalThis, 'fetch').mockRejectedValue(
+            timeoutError
+        );
+        await expect(fetchData(filename))
+            .rejects.toThrow(`Fetch Timeout: ${filename}`);
     });
-
-    it('throws when fetch fails (network error)', async () => {
-        const err = new TypeError('Network Error:');
-        vi.spyOn(globalThis, 'fetch').mockRejectedValue(err);
-        await expect(fetchData('legislators-current.json')).rejects
-            .toThrow(/Network Error/);
+    it('rethrows any other error unchanged', async () => {
+        const unknownError = new Error('Unknown Error');
+        vi.spyOn(globalThis, 'fetch').mockRejectedValue(
+            unknownError
+        );
+        expect(fetchData(filename))
+            .rejects.toThrow('Unknown Error');
     });
-})
+    it('resolves with parsed JSON on success', async () => {
+        vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+            {
+                ok: true,
+                json: () => Promise.resolve({ id: 1, name: 'Alice' }),
+            } as Response
+        );
+        const result = await fetchData(filename);
+        expect(result).toEqual(({ id: 1, name: 'Alice' }));
+    });
+});
