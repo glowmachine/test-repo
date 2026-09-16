@@ -17,7 +17,7 @@ export default function TableFilters() {
 
     return (
         <div id='filters_container'
-            className='w-full flex flex-row flex-wrap items-center justify-evenly gap-1
+            className='w-full flex flex-row flex-wrap items-center justify-evenly gap-1 pb-2
                 *:border *:rounded *:px-2 *:pt-2 *:pb-4 *:flex *:gap-2 *:flex *:flex-col *:items-center'>
             <fieldset>
                 <legend>State</legend>
