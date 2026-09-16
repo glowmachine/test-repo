@@ -15,24 +15,14 @@ export default function About() {
             <div className='flex justify-center'>
                 <section className='w-[min(1000px,80vw)] flex flex-col gap-3 sm:gap-6 *:text-lg'>
                     <div>
-                        <h2 className='font-bold text-2xl'>About USCLV</h2>
-                        <p>"United States Congress Legislators Viewer" sources information from <a href='https://github.com/unitedstates/congress-legislators' target='_blank' rel='noopener noreferrer' className='underline'>unitedstates/congress-legislators</a>, a public GitHub repo of congressional data maintained by volunteers in YAML text files. This project fetches the records related to current legislators in Congress and formats them for simple browsing, making it easier to look up and check for missing or out-of-date info. USCLV is not associated with the official repository.</p>
-                    </div>
-                    <div>
-                        <h2 className='font-bold text-2xl'>How to Use</h2>
-                        <ul className='ml-4 list-disc'>
-                            <li>Search: the search field at the top can be used to find legislators by entering any part of any of their names.</li>
-                            <li>Filter: the filter button provides options to narrow results by state, party, and/or type.</li>
-                            <li>Columns: click the table headers to sort column data, click the columns icon to select what values to view by the names of keys used in the database.</li>
-                            <li>Links: some values are connected to different resources and can be clicked to visit their respective websites, profiles, or social media pages.</li>
-                            <li>Details: click on a legislator's name to view their details page, where you can find the text records for their entry in the source YAML files. Grayed out values are not present in the database (missing, unavailable, or not applicable) and are only displayed for reference.</li>
-                        </ul>
+                        <h2 className='font-bold text-2xl'>About the USCL Viewer</h2>
+                        <p>The "United States Congress Legislators Viewer" uses data directly from <a href='https://github.com/unitedstates/congress-legislators' target='_blank' rel='noopener noreferrer' className='underline'>unitedstates/congress-legislators</a>, a public GitHub repo of congressional data maintained by volunteers. This site takes the records of current Congress members and formats them for simpler browsing, making it easier to search and check for info that may need updating. USCLV is an independent project.</p>
                     </div>
                     <div>
                         <h2 className='font-bold text-2xl'>Feedback</h2>
                         <ul className='ml-4 list-disc'>
-                            <li>If you have found any bugs to report or features to request, please open a GitHub issue <a href='https://github.com/glowmachine/uscl-viewer' target='_blank' rel='noopener noreferrer' className='underline'>here</a>.</li>
-                            <li>If you have found any broken or incorrect information, please consider contributing to the unitedstates/congress-legislators project <a href='https://github.com/unitedstates/congress-legislators' target='_blank' rel='noopener noreferrer' className='underline'>here</a>.</li>
+                            <li>If you have found any bugs to report or features to request, please <a href='https://github.com/glowmachine/uscl-viewer' target='_blank' rel='noopener noreferrer' className='underline'>open a GitHub issue</a>.</li>
+                            <li>If you have found any information in need of updating, please consider contributing to the <a href='https://github.com/unitedstates/congress-legislators' target='_blank' rel='noopener noreferrer' className='underline'>unitedstates/congress-legislators</a> project.</li>
                         </ul>
                     </div>
                 </section>
