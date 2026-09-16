@@ -36,7 +36,7 @@ export function DataProvider({ children }: PropsWithChildren) {
                     const legislatorData = currentData.map(member => ({
                         currentData: member,
                         socialData: socialData.find(item => item.id.bioguide === member.id.bioguide),
-                        offices: officeData.find(item => item.id.bioguide === member.id.bioguide),
+                        officeData: officeData.find(item => item.id.bioguide === member.id.bioguide),
                     }));
                     const parsedData: Legislator[] = z.array(LegislatorSchema).parse(legislatorData);
                     setLegislators(parsedData);
