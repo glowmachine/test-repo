@@ -3,7 +3,7 @@ import { defaultFilterOptions, useTableContext } from "../contexts/TableContext"
 import debounce from "../util/debounce";
 import FilterSelector from "./List/FilterSelector";
 
-export const buttonStyle = 'size-8 grid place-content-center rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-600';
+const buttonStyle = 'size-8 grid place-content-center rounded-full hover:bg-zinc-200 dark:hover:bg-zinc-500';
 
 export default function Search() {
     const { setFilterOptions, searchInput, setSearchInput } = useTableContext();
@@ -86,8 +86,8 @@ export default function Search() {
             )} */}
             <div className=''>
                 <div className='absolute pl-4 z-10 flex items-center gap-2 right-3 top-1/2 -translate-y-1/2 bg-zinc-100 dark:bg-zinc-700'>
-                    <button onClick={handleClearButton} className='text-sm underline'>clear</button>
-                    <button className={`${buttonStyle} ${showFilters ? 'bg-zinc-200 dark:bg-zinc-600' : ''}`}
+                    <button onClick={handleClearButton} className='text-sm underline hover:cursor-pointer'>clear</button>
+                    <button className={`${buttonStyle} hover:cursor-pointer ${showFilters ? 'bg-zinc-200 dark:bg-zinc-600' : ''}`}
                         onClick={handleFilterButton}>
                         <span className='material-symbols-outlined'
                             style={{ fontVariationSettings: `'FILL' ${showFilters ? 1 : 0}` }}

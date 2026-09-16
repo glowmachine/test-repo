@@ -4,7 +4,7 @@ export default function About() {
     const navigate = useNavigate();
 
     return (
-        <div className='min-w-0 h-full overflow-auto px-5 pb-5 flex flex-col gap-3'>
+        <div className='min-w-0 h-full overflow-auto px-5 pb-5 flex flex-col gap-3 link-btn'>
             <button
                 onClick={() => navigate(-1)}
                 className='mt-2 shrink-0 w-10 h-10 rounded-full grid place-items-center

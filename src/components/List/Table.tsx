@@ -10,8 +10,8 @@ import TableRow from "./TableRow";
 import type { RowData } from "../../types/RowData";
 import ToTopButton from "../ToTopButton";
 
-const buttonStyle = `h-10 w-10 flex items-center justify-center rounded-full hover:cursor-pointer
-hover:hover:bg-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-zinc-600`;
+const buttonStyle = `size-10 rounded-full grid place-items-center hover:cursor-pointer
+                    hover:bg-zinc-200 dark:hover:text-zinc-200 dark:hover:bg-zinc-600`;
 
 export default function Table() {
     const { legislators, isLoading, error } = useDataContext();
@@ -74,7 +74,7 @@ export default function Table() {
                                 ({ ...p, index: p.index + p.rowsPerPage }))}>
                             →</button>
                     </div> */}
-                    <button className={`${buttonStyle} ${colSelectOpen ? 'bg-zinc-200' : ''}`}
+                    <button className={`${buttonStyle} ${colSelectOpen ? 'bg-zinc-200 dark:bg-zinc-600' : ''}`}
                         onClick={() => setColSelectOpen(prev => !prev)}
                     >
                         <span className='material-symbols-outlined'

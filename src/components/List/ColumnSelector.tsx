@@ -99,9 +99,7 @@ export default function ColumnSelector({ colSelectOpen, setColSelectOpen }: Colu
     }, [colSelectOpen]);
 
     return (
-        <div className='fixed inset-0 z-100 bg-black/50
-                grid place-items-center'>
-
+        <div className='fixed inset-0 z-100 bg-black/50 grid place-items-center'>
             <div ref={selectorPanel}
                 className='w-[max(20rem,25rem)] text-sm rounded-[2rem] p-5 flex flex-col
                     bg-zinc-100 dark:bg-zinc-800'>
