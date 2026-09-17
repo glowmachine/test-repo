@@ -7,7 +7,7 @@ export type RowData = {
     govtrack?: string,
     opensecrets?: string,
     votesmart?: string,
-    fec: string[],
+    fec?: string[],
     cspan?: string,
     wikipedia?: string,
     ballotpedia?: string,
