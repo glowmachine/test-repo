@@ -4,7 +4,7 @@ type ToTopButtonProps = {
 }
 export default function ToTopButton({ div, style }: ToTopButtonProps) {
     return <button className={`fixed right-5 bottom-5 sm:right-15 sm:bottom-10 text-2xl
-        bg-white dark:bg-zinc-800 ${style}`}
+        border bg-white dark:bg-zinc-800 ${style}`}
         onClick={() => div.current?.scrollTo({ top: 0, behavior: 'smooth' })}>
         ↑
     </button>;
