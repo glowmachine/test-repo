@@ -4,6 +4,7 @@ name: Deploy app to Pages
 on:
   # Runs on version bumps
   push:
+    branches: ['try/base']
     tags:
       - 'v*'
 

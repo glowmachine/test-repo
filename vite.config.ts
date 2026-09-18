@@ -15,5 +15,5 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './tests/setup.js'
   },
-  base: '/uscl-viewer/',
+  base: '/test-repo/',
 });
