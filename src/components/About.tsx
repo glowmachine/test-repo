@@ -16,13 +16,13 @@ export default function About() {
                 <section className='w-[min(1000px,80vw)] flex flex-col gap-3 sm:gap-6 *:text-lg'>
                     <div>
                         <h2 className='font-bold text-2xl'>About the USCL Viewer</h2>
-                        <p>The "United States Congress Legislators Viewer" uses data directly from <a href='https://github.com/unitedstates/congress-legislators' target='_blank' rel='noopener noreferrer' className='underline'>unitedstates/congress-legislators</a>, a public GitHub repo of congressional data maintained by volunteers. This site takes the records of current Congress members and formats them for simpler browsing, making it easier to search and check for info that may need updating. USCLV is an independent project.</p>
+                        <p>The "United States Congress Legislators Viewer" uses data directly from <span className='font-semibold'>unitedstates/congress-legislators</span>, a GitHub repository of congressional data maintained by volunteers. This site takes those records of current Congress members and formats them for simpler browsing, making it easier to search and check for info that may need updating.</p>
                     </div>
                     <div>
                         <h2 className='font-bold text-2xl'>Feedback</h2>
                         <ul className='ml-4 list-disc'>
-                            <li>If you have found any bugs to report or features to request, please <a href='https://github.com/glowmachine/uscl-viewer' target='_blank' rel='noopener noreferrer' className='underline'>open a GitHub issue</a>.</li>
-                            <li>If you have found any information in need of updating, please consider contributing to the <a href='https://github.com/unitedstates/congress-legislators' target='_blank' rel='noopener noreferrer' className='underline'>unitedstates/congress-legislators</a> project.</li>
+                            <li>Any broken links or images and missing or incorrect information should reflect what's currently in the database. If you have found anything in need of updating, please consider contributing to the <a href='https://github.com/unitedstates/congress-legislators' target='_blank' rel='noopener noreferrer' className='underline'>unitedstates/congress-legislators</a> project.</li>
+                            <li>If you have found any bugs to report, please <a href='https://github.com/glowmachine/uscl-viewer' target='_blank' rel='noopener noreferrer' className='underline'>open a GitHub issue</a>.</li>
                         </ul>
                     </div>
                 </section>
